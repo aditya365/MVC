@@ -19,7 +19,7 @@ namespace MVCMusicStore.Controllers
         }
 
         public string Details(int Id) {
-            return "in Details() id="+Id;
+            return "in Details() hello id="+Id;
         }
     }
 }
