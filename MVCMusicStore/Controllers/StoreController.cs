@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVCMusicStore.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,8 +19,9 @@ namespace MVCMusicStore.Controllers
             return message;
         }
 
-        public string Details(int Id) {
-            return "in Details() hello id="+Id;
+        public ActionResult Details(int Id) {
+            return View();
+
         }
     }
 }
