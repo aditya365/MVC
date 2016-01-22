@@ -22,7 +22,6 @@ namespace MVCMusicStore.Controllers
         }
 
         public ActionResult Search(string q) {
-            var album = MusicStoreDB
             return View();
         }
 
