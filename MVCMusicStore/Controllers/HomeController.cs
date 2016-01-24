@@ -21,6 +21,14 @@ namespace MVCMusicStore.Controllers
             return View();
         }
 
+        public JsonResult QuickSearch(string term) {
+            var musicStoreDB = new MusicStoreDB();
+            var albums = musicStoreDB.Albums.Where(a => a.Title.Contains(term)).
+                ToList().
+                Select(a => new { value = a.Title });
+            return Json(albums,JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult AlbumSearch(string album) {
             var musicStoreDB = new MusicStoreDB();
             var albums = musicStoreDB.Albums.Where(a => a.Title.Contains(album)).ToList();

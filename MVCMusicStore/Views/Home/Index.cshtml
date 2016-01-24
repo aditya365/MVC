@@ -10,7 +10,6 @@
 <div>
 </div>
 <div id="AlbumSearchResult"></div>
-
 <div>
     @using (@Ajax.BeginForm("AlbumSearch", new AjaxOptions
     {
@@ -20,9 +19,9 @@
         UpdateTargetId = "AlbumSearchResult",
         OnFailure = "AlbumSearchFailure"
     })) {
-        <input type="text" name="album"/>
+        <input type="text" name="album" data-autocomplete-source="@Url.Action("QuickSearch", "Home")" />
         <input type="submit" value="search"/>
-        <img src="~/Content/loading.gif" id="AjaxLoad" />
+        <img src="~/Content/loading.gif" id="AjaxLoad" style="display:none"/>
     }
 
 </div>
@@ -76,4 +75,5 @@
 
 @section scripts{
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
 }
