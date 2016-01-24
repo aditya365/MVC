@@ -7,6 +7,50 @@
     <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
     <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
+<div>
+</div>
+<div id="AlbumSearchResult"></div>
+
+<div>
+    @using (@Ajax.BeginForm("AlbumSearch", new AjaxOptions
+    {
+        HttpMethod = "get",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementId = "AjaxLoad",
+        UpdateTargetId = "AlbumSearchResult",
+        OnFailure = "AlbumSearchFailure"
+    })) {
+        <input type="text" name="album"/>
+        <input type="submit" value="search"/>
+        <img src="~/Content/loading.gif" id="AjaxLoad" />
+    }
+
+</div>
+
+<div id="BestSellingArtists">
+    @Ajax.ActionLink("Know best selling artists"
+    ,"BestSellingArtist",null, 
+    new {
+        UpdateTargetId="BestSellingArtists",
+        InsertionMode=InsertionMode.Replace,
+        allowCache=true,
+        HttpMethod="get"
+},null)
+</div>
+
+
+
+<div id="DailyDeal">
+    @Ajax.ActionLink("Click here to know today's deal!",
+    "DailyDeal",null,
+    new AjaxOptions {
+        UpdateTargetId="DailyDeal",
+        InsertionMode=InsertionMode.Replace,
+        AllowCache=true,
+        HttpMethod="get"
+    },
+    new { @class="btn btn-primary"})
+</div>
 
 <div class="row">
     <div class="col-md-4">
@@ -29,3 +73,7 @@
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
+
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+}

@@ -7,10 +7,19 @@ using System.Web.Mvc;
 
 namespace MVCMusicStore.Models
 {
-    public class Order
+    public class Order : IValidatableObject
     {
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) {
+            if (FirstName != null && FirstName.Split(' ').Length > 4) {
+                yield return new ValidationResult("This field can't be more  than 4 words",new[] { FirstName });
+            }
+        }
+
+
         public int OrderId { get; set; }
+        [Display(Name ="Orer Date",Order =5)]
         public DateTime OrderDate { get; set; }
+        [Display(Name ="User Name")]
         public string UserName { get; set; }
         [Required]
         [StringLength(50,MinimumLength =3,ErrorMessage ="Minimum length for your first name is 3")]

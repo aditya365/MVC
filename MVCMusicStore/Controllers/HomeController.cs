@@ -21,6 +21,33 @@ namespace MVCMusicStore.Controllers
             return View();
         }
 
+        public ActionResult AlbumSearch(string album) {
+            var musicStoreDB = new MusicStoreDB();
+            var albums = musicStoreDB.Albums.Where(a => a.Title.Contains(album)).ToList();
+            return PartialView("_AlbumSearch",albums);
+        }
+
+
+        public ActionResult BestSellingArtist() {
+            var musicStoreDB = new MusicStoreDB();
+            var artist = musicStoreDB.Artists.OrderBy(a=>a.Name).First();
+            return PartialView("_BestSellingArtist",artist); 
+        }
+
+
+        public ActionResult DailyDeal() {
+            var album = GetDailyDeal();
+            return PartialView("_DailyDeal",album);
+        }
+
+        private Album GetDailyDeal() {
+            var musicStoreDb = new MusicStoreDB();
+            var album = musicStoreDb.Albums.OrderBy(a => a.Price).First();
+            album.Price *= 0.5m;
+            return album;
+        }
+
+
         public ActionResult Search(string q) {
             return View();
         }
